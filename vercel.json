@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build --workspace @linkedin-clone/web",
-  "installCommand": "npm install --include=dev --workspace @linkedin-clone/web --workspace @linkedin-clone/shared --include-workspace-root",
+  "buildCommand": "cd apps/web && npm run build",
+  "installCommand": "npm install --workspaces --include-workspace-root --include=dev",
   "outputDirectory": "apps/web/.next"
 }
