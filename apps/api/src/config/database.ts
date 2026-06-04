@@ -4,6 +4,11 @@ import { env } from "#src/config/env.js";
 export async function connectDatabase() {
   mongoose.set("strictQuery", true);
 
+  if (!env.MONGODB_URI) {
+    console.warn("MONGODB_URI is not configured. Running API in demo mode without database persistence.");
+    return;
+  }
+
   try {
     await mongoose.connect(env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000

@@ -14,3 +14,5 @@ coverage
 .playwright-cli
 playwright-report
 test-results
+
+.vercel
