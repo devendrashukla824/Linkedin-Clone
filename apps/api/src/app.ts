@@ -1,6 +1,7 @@
 import cors from "cors";
-import express from "express";
-import helmetMiddleware from "helmet";
+import express, { type RequestHandler } from "express";
+import { createRequire } from "node:module";
+import type { HelmetOptions } from "helmet";
 import morgan from "morgan";
 import { env } from "#src/config/env.js";
 import { errorMiddleware } from "#src/interfaces/http/middleware/error-middleware.js";
@@ -19,6 +20,9 @@ import { notificationRoutes } from "#src/interfaces/http/routes/notification-rou
 import { postRoutes } from "#src/interfaces/http/routes/post-routes.js";
 import { profileRoutes } from "#src/interfaces/http/routes/profile-routes.js";
 
+const requireModule = createRequire(import.meta.url);
+const helmet = requireModule("helmet") as (options?: Readonly<HelmetOptions>) => RequestHandler;
+
 export function createApp() {
   const app = express();
   const allowedOrigins = env.CLIENT_URL.split(",").map((origin) => origin.trim());
@@ -27,7 +31,7 @@ export function createApp() {
   app.set("trust proxy", 1);
   app.use(requestIdMiddleware);
   app.use(
-    helmetMiddleware({
+    helmet({
       contentSecurityPolicy: env.NODE_ENV === "production" ? undefined : false,
       crossOriginResourcePolicy: { policy: "cross-origin" }
     })
