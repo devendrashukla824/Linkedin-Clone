@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import helmet from "helmet";
+import helmetMiddleware from "helmet";
 import morgan from "morgan";
 import { env } from "#src/config/env.js";
 import { errorMiddleware } from "#src/interfaces/http/middleware/error-middleware.js";
@@ -27,7 +27,7 @@ export function createApp() {
   app.set("trust proxy", 1);
   app.use(requestIdMiddleware);
   app.use(
-    helmet({
+    helmetMiddleware({
       contentSecurityPolicy: env.NODE_ENV === "production" ? undefined : false,
       crossOriginResourcePolicy: { policy: "cross-origin" }
     })
