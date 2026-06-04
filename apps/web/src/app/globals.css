@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 24% 96%;
+  --foreground: 214 38% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 214 38% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 214 38% 12%;
+  --primary: 203 94% 34%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 205 28% 92%;
+  --secondary-foreground: 214 38% 16%;
+  --muted: 210 22% 92%;
+  --muted-foreground: 214 12% 43%;
+  --accent: 174 49% 42%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 18% 86%;
+  --input: 214 18% 86%;
+  --ring: 203 94% 34%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 214 30% 8%;
+  --foreground: 210 30% 96%;
+  --card: 214 28% 12%;
+  --card-foreground: 210 30% 96%;
+  --popover: 214 28% 12%;
+  --popover-foreground: 210 30% 96%;
+  --primary: 199 89% 48%;
+  --primary-foreground: 214 38% 8%;
+  --secondary: 214 22% 18%;
+  --secondary-foreground: 210 30% 92%;
+  --muted: 214 20% 18%;
+  --muted-foreground: 215 16% 70%;
+  --accent: 172 54% 44%;
+  --accent-foreground: 214 38% 8%;
+  --destructive: 0 74% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 20% 24%;
+  --input: 214 20% 24%;
+  --ring: 199 89% 48%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  .feed-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr) minmax(0, 320px);
+  }
+
+  @media (max-width: 1180px) {
+    .feed-grid {
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .feed-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
